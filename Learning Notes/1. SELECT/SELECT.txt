@@ -1,0 +1,41 @@
+
+## Syntax : 
+
+SELECT
+   select_list
+FROM
+   table_name;
+   
+The FROM clause is optional. If you do not query data from any table, you can omit the FROM clause in the SELECT statement.
+
+
+SELECT first_name FROM customer;
+
+-- Here we gave only one column name i.e. first_name.
+
+SELECT
+   first_name,
+   last_name,
+   email
+FROM
+   customer;
+   
+-- Multiple column selection from same table.
+   
+   
+SELECT * FROM customer;
+
+-- Selection of all columns.
+
+SELECT 
+   first_name || ' ' || last_name,
+   email
+FROM 
+   customer;
+
+-- Here we can use || '  ' || to join two colums over the select query.   
+
+
+SELECT 5 * 3;
+
+-- As FROM clouse is optional we are not fetching data from table , so above query will return us 15.

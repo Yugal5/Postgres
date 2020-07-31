@@ -1,0 +1,126 @@
+Syntax : 
+
+SELECT
+	select_list
+FROM
+	table_name
+ORDER BY
+	sort_expression1 [ASC | DESC],
+        ...
+	sort_expressionN [ASC | DESC];
+
+
+PostgreSQL evaluates the clauses in the SELECT statment in the following order: FROM, SELECT, and ORDER BY.
+
+SELECT
+	first_name,
+	last_name
+FROM
+	customer
+ORDER BY
+	first_name ASC;
+	
+## Expalin --
+
+Here bco of  'first_name ASC' data displayed in alphabatical order like A-Z for column first_name.
+
+
+SELECT
+	first_name,
+	last_name
+FROM
+	customer
+ORDER BY
+	first_name;
+
+## Expalin --
+
+	Even though if we didn't specify ASC it will take ASC as by default.
+
+SELECT
+       first_name,
+       last_name
+FROM
+       customer
+ORDER BY
+       last_name DESC;
+	   
+## Expalin --
+
+Here we can see data will be ORDER By last_name , based on the result of this first_name column will be change.
+
+SELECT
+	first_name,
+	last_name
+FROM
+	customer
+ORDER BY
+	first_name ASC,
+	last_name DESC;
+	
+## Expalin --
+
+Here we can see data fetch based on both columns so it will order by column first_name and then sort column last_name.
+
+C  -  A
+C  -  B
+D  -  A
+D  -  B
+
+
+SELECT 
+	first_name,
+	LENGTH(first_name) len
+FROM
+	customer
+ORDER BY 
+	len DESC;
+
+
+## Expalin --
+
+We can also use ORDER BY with the predefine funtions of a postgres , in above exampl we calculated LENGTH of first_name and use alais for t as len.
+Then we order it by len , which will show length of that first_name and sort according to it.
+
+
+
+-- create a new table
+CREATE TABLE sort_demo(
+	num INT
+);
+
+-- insert some data
+INSERT INTO sort_demo(num)
+VALUES(1),(2),(3),(null);
+
+
+SELECT num
+FROM sort_demo
+ORDER BY num;
+
+SELECT num
+FROM sort_demo
+ORDER BY num NULLS LAST;
+
+SELECT num
+FROM sort_demo
+ORDER BY num NULLS FIRST;
+
+SELECT num
+FROM sort_demo
+ORDER BY num DESC;
+
+SELECT num
+FROM sort_demo
+ORDER BY num DESC NULLS LAST;	
+
+
+## Expalin --
+
+With above all examples , NULL can be arrannge with the help of NULLS LAST and NULLS FIRST.
+
+
+Summary:
+Use the ORDER BY clause in the SELECT statement to sort rows.
+Use the ASC option to sort rows in ascending order and DESC option to sort rows in descending order. The ORDER BY clause uses the ASC option by default.
+Use NULLS FIRST and NULLS LAST options to explicitly specify the order of NULL with other non-null values.

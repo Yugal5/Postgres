@@ -1,0 +1,130 @@
+The SELECT statement returns all rows from one or more columns in a table. To select rows that satisfy a specified condition, you use a WHERE clause.
+
+Syntax  : 
+
+SELECT select_list
+FROM table_name
+WHERE condition
+ORDER BY sort_expression
+
+
+PostgreSQL evaluates the WHERE clause after the FROM clause and before the SELECT and ORDER BY clause:
+
+If you use column aliases in the SELECT clause, you cannot use them in the WHERE clause.
+
+Operator	Description
+=	Equal
+>	Greater than
+<	Less than
+>=	Greater than or equal
+<=	Less than or equal
+<> or !=	Not equal
+AND	Logical operator AND
+OR	Logical operator OR
+IN	Return true if a value matches any value in a list
+BETWEEN	Return true if a value is between a range of values
+LIKE	Return true if a value matches a pattern
+IS NULL	Return true if a value is NULL
+NOT	Negate the result of other operators
+
+
+SELECT
+	last_name,
+	first_name
+FROM
+	customer
+WHERE
+	first_name = 'Jamie';
+	
+## Explain --
+
+Results are getting fetch based on the output we received form the serlect query.
+
+
+SELECT
+	last_name,
+	first_name
+FROM
+	customer
+WHERE
+	first_name = 'Jamie' AND 
+        last_name = 'Rice';
+		
+## Explain --
+
+Here we use 'AND' which will pull the record from DB only if both condition satisfy.
+We can have multiple condition with AND , but make sure it should satisfy all the condition then only data will be retrieved.
+
+SELECT
+	first_name,
+	last_name
+FROM
+	customer
+WHERE
+	last_name = 'Rodriguez' OR 
+	first_name = 'Adam';
+	
+## Explain --
+
+Here we used 'OR' which specifies that in case any one the condition satisfies from mention condition then show that data.
+OR must be use carefully as any one condition satisfies it will pull the record.
+
+
+SELECT
+	first_name,
+	last_name
+FROM
+	customer
+WHERE 
+	first_name IN ('Ann','Anne','Annie');
+	
+	
+## Explain --
+
+
+When we have to check multiple condition on same column IN is most useful. 
+
+
+SELECT
+	first_name,
+	last_name
+FROM
+	customer
+WHERE 
+	first_name LIKE 'Ann%'
+
+## Explain --
+
+LIKE is pattern matching operator , where we can use '%' / wildcard  that matches with the providded partial string with results we received.
+
+
+SELECT
+	first_name,
+	LENGTH(first_name) name_length
+FROM
+	customer
+WHERE 
+	first_name LIKE 'A%' AND
+	LENGTH(first_name) BETWEEN 3 AND 5
+ORDER BY
+	name_length;
+	
+## Explain --
+
+BETWEEN is used to fetch record which are fall under 3-5 (both inclusive) i.e. 3,4,5.
+
+SELECT 
+	first_name, 
+	last_name
+FROM 
+	customer 
+WHERE 
+	first_name LIKE 'Bra%' AND 
+	last_name <> 'Motley';
+	
+## Explain --
+
+<> not equal to , this is used to avoid result which fall under this category.
+
+
+

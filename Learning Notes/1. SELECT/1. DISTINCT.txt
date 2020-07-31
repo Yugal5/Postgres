@@ -1,0 +1,76 @@
+CREATE TABLE distinct_demo (
+	id serial NOT NULL PRIMARY KEY,
+	bcolor VARCHAR,
+	fcolor VARCHAR
+);
+
+
+INSERT INTO distinct_demo (bcolor, fcolor)
+VALUES
+	('red', 'red'),
+	('red', 'red'),
+	('red', NULL),
+	(NULL, 'red'),
+	('red', 'green'),
+	('red', 'blue'),
+	('green', 'red'),
+	('green', 'blue'),
+	('green', 'green'),
+	('blue', 'red'),
+	('blue', 'green'),
+	('blue', 'blue');
+	
+	
+	
+	SELECT
+	id,
+	bcolor,
+	fcolor
+FROM
+	distinct_demo ;
+	
+	
+SELECT
+	DISTINCT bcolor
+FROM
+	distinct_demo
+ORDER BY
+	bcolor;
+
+
+### Expalin --
+
+With above example we are fetching the record just unique values from the column bcolor.
+
+
+
+SELECT
+	DISTINCT bcolor,
+	fcolor
+FROM
+	distinct_demo
+ORDER BY
+	bcolor,
+	fcolor;
+	
+
+### Expalin --
+
+With above example we are fetching the record which are possible combination of column bcolor and column fcolor.
+Possible unique pair will be bring ammong them.
+
+
+SELECT
+	DISTINCT ON (bcolor) bcolor,
+	fcolor
+FROM
+	distinct_demo 
+ORDER BY
+	bcolor,
+	fcolor;
+	
+## Expalin --
+
+With above example we are fetching the record unique from the bcolor and with that first output that may be based on order by.
+But here no. of records fetch will depends on unique value in column bcolor.
+
