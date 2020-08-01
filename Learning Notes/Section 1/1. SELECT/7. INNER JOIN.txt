@@ -1,0 +1,140 @@
+While working with large DB system data is often distributed with many tables and we have to fetch this data based on some condition.
+Here Joins work very will to check common data from this tables based on some comoom fields.
+
+E.g. 
+
+SELECT
+	pka,
+	c1,
+	pkb,
+	c2
+FROM
+	A
+INNER JOIN B ON pka = fka;
+
+
+## To join table A with the table B, you follow these steps:
+
+First, specify columns from both tables that you want to select data in the SELECT clause.
+Second, specify the main table i.e., table A in the FROM clause.
+Third, specify the second table (table B) in the INNER JOIN clause and provide a join condition after the ON keyword.
+
+
+For each row in the table A, inner join compares the value in the pka column with the value in the fka column of every row in the table B:
+
+If these values are equal, the inner join creates a new row that contains all columns of both tables and adds it to the result set.
+In case these values are not equal, the inner join just ignores them and moves to the next row.
+
+
+
+If you reference columns with the same name from different tables in a query, you will get an error. 
+To avoid the error, you need to qualify these columns fully using the following syntax:
+
+table_name.column_name
+
+SELECT
+	customer.customer_id,
+	first_name,
+	last_name,
+	amount,
+	payment_date
+FROM
+	customer
+INNER JOIN payment 
+    ON payment.customer_id = customer.customer_id
+ORDER BY payment_date;
+
+
+## Explain --
+Here we are fetching columns from different tables, since we have one common filed between them and i.e. customer_id.
+So, we use INNER JOIN on customer_id.
+As a result it will give us output with all column in select query for which where condition satisfy.
+Here we use customer.customer_id since we have this column in both the tables , so we need to explicitly have to specify this.
+Note : INNER JOIN gives only matched records from both the tables.
+
+SELECT
+	c.customer_id,
+	first_name,
+	last_name,
+	email,
+	amount,
+	payment_date
+FROM
+	customer c
+INNER JOIN payment p 
+    ON p.customer_id = c.customer_id
+WHERE
+    c.customer_id = 2;
+	
+## Explain --
+
+We can also use alias for tables , as we can see from above e.g. instead of customer.customer_id we use c.customer_id bcoz we used alias for it.
+
+SELECT
+	customer_id,
+	first_name,
+	last_name,
+	amount,
+	payment_date
+FROM
+	customer
+INNER JOIN payment USING(customer_id)
+ORDER BY payment_date;
+
+## Explain --
+
+Since both tables have the same customer_id column, you can use the USING .
+
+SELECT
+	c.customer_id,
+	c.first_name customer_first_name,
+	c.last_name customer_last_name,
+	s.first_name staff_first_name,
+	s.last_name staff_last_name,
+	amount,
+	payment_date
+FROM
+	customer c
+INNER JOIN payment p 
+    ON p.customer_id = c.customer_id
+INNER JOIN staff s 
+    ON p.staff_id = s.staff_id
+ORDER BY payment_date;
+
+
+e.g. of using INNER JOIN on multiple tables.
+
+To join the three tables, you place the second INNER JOIN clause after the first INNER JOIN clause as the above query.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

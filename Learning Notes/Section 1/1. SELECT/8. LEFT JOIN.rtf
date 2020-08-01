@@ -1,0 +1,49 @@
+To select data from the table A that may or may not have corresponding rows in the table B , you use the LEFT JOIN clause.
+
+To join the table A with the table B table using a left join, you follow these steps:
+
+First, specify the columns in both tables from which you want to select data in the SELECT clause.
+Second, specify the left table (table A) in the FROM clause.
+Third, specify the right table (table B) in the LEFT JOIN clause and the join condition after the ON keyword.
+
+
+Note :  In LEFT JOIN we are specifying fields / columns need to pull for SELECT and based on join condition it fetch the records.
+		But, here it takes all the records from Left table and add Null to row for which we don't have matching field from JOIN condition.
+		
+SELECT
+	film.film_id,
+	film.title,
+	inventory_id
+FROM
+	film
+LEFT JOIN inventory 
+   ON inventory.film_id = film.film_id
+WHERE inventory.film_id IS NULL
+ORDER BY title;
+
+## Explain --
+Here we can see from result that it will have NULL available even there is no matching.
+
+SELECT
+	f.film_id,
+	title,
+	inventory_id
+FROM
+	film f
+LEFT JOIN inventory i USING (film_id)
+WHERE i.film_id IS NULL
+ORDER BY title;
+
+## Explain --
+
+
+If both tables have the same column name used in the ON clause, you can use the USING.
+
+Note : 
+LEFT JOIN is also referred to as LEFT OUTER JOIN.
+
+Summery : 
+
+This technique is useful when you want to select rows from one table that do not have matching rows in another table.
+
+

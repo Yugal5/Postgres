@@ -1,0 +1,43 @@
+Different from other join clauses such as LEFT JOIN  or INNER JOIN, the CROSS JOIN clause does not have a join predicate.
+
+Suppose you have to perform a CROSS JOIN of two tables T1 and T2.
+
+If T1 has n rows and T2 has m rows, the result set will have nxm rows. For example, the T1 has 1,000 rows and T2 has 1,000 rows, the result set will have 1,000 x 1,000 = 1,000,000 rows.
+
+The following illustrates the syntax of the CROSS JOIN syntax:
+
+
+SELECT select_list
+FROM T1
+CROSS JOIN T2;
+
+The following statement is equivalent to the above statement:
+
+SELECT select_list
+FROM T1, T2;
+
+DROP TABLE IF EXISTS T1;
+CREATE TABLE T1 (label CHAR(1) PRIMARY KEY);
+
+DROP TABLE IF EXISTS T2;
+CREATE TABLE T2 (score INT PRIMARY KEY);
+
+INSERT INTO T1 (label)
+VALUES
+	('A'),
+	('B');
+
+INSERT INTO T2 (score)
+VALUES
+	(1),
+	(2),
+	(3);
+	
+	
+SELECT *
+FROM T1
+CROSS JOIN T2;
+
+Summery: 
+
+For Cross Join, we can say that all the fileds from Left table will get seperate row with Right side table.

@@ -1,0 +1,34 @@
+The EXCEPT operator returns distinct rows from the first (left) query that are not in the output of the second (right) query.
+
+
+## Syntax :
+
+SELECT select_list
+FROM A
+EXCEPT 
+SELECT select_list
+FROM B;
+
+The queries that involve in the EXCEPT need to follow these rules:
+
+The number of columns and their orders must be the same in the two queries.
+The data types of the respective columns must be compatible.
+
+
+SELECT * FROM top_rated_films
+EXCEPT 
+SELECT * FROM most_popular_films;
+
+## Explain --
+
+This will select all distinct values from table A and exclue all matched rows from table B.
+
+SELECT * FROM top_rated_films
+EXCEPT 
+SELECT * FROM most_popular_films
+ORDER BY title;
+
+
+## Explain --
+
+This will arrange the data in a order by title manner.
