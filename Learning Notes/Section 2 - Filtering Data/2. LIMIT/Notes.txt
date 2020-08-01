@@ -1,0 +1,50 @@
+LIMIT is very important operator when it commes to performance improvisation. 
+We must use LIMIT if we dont want to fetch all related records fromm output query.
+WHERE -- help in filtering based on condition.
+ORDER BY -- help in sort of records whch we received from the WHERE clouse / Output.
+LIMIT -- Restrict to show all the records.
+
+Syntact with LIMIT : 
+
+SELECT select_list 
+FROM table_name
+ORDER BY sort_expression
+LIMIT row_count;
+
+Syntact with LIMIT and OFFSET :
+
+SELECT select_list
+FROM table_name
+LIMIT row_count OFFSET row_to_skip;
+
+
+
+
+SELECT
+	film_id,
+	title,
+	release_year
+FROM
+	film
+ORDER BY
+	film_id
+LIMIT 5;
+
+## Explain --
+Here we will restict the top 5 records to be get displayed.
+
+
+SELECT
+	film_id,
+	title,
+	release_year
+FROM
+	film
+ORDER BY
+	film_id
+LIMIT 4 OFFSET 3;
+
+## Explain --
+
+Here we are specifying that you skip first 3 records and then start picking the records from the record 4. 
+Useful in many cases.
