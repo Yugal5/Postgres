@@ -1,4 +1,4 @@
-LIMIT is very important operator which it commes to performance improvisation. 
+LIMIT is very important operator when it commes to performance improvisation. 
 We must use LIMIT if we dont want to fetch all related records fromm output query.
 WHERE -- help in filtering based on condition.
 ORDER BY -- help in sort of records whch we received from the WHERE clouse / Output.
