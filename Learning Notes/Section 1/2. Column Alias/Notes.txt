@@ -1,0 +1,72 @@
+A column alias allows you to assign a column or an expression in the select list of a SELECT statement a temporary name. 
+The column alias exists temporarily during the execution of the query.
+
+
+Syntax :
+
+SELECT column_name AS alias_name
+FROM table_name;
+
+In this syntax, the column_name is assigned an alias alias_name. The AS keyword is optional so you can omit it like this:
+
+SELECT column_name alias_name
+FROM table_name;
+
+The following syntax illustrates how to set an alias for an expression in the SELECT clause:
+
+SELECT expression AS alias_name
+FROM table_name;
+
+SELECT 
+   first_name, 
+   last_name AS surname
+FROM customer;
+
+## Explain --
+
+Here we can see that last_name will be displayed as a surname in output of query.
+
+SELECT 
+   first_name, 
+   last_name surname
+FROM customer;
+
+## Explain --
+
+AS is a optional , so we eliminated it.
+
+SELECT 
+   first_name || ' ' || last_name 
+FROM 
+   customer;
+   
+## Explain --
+
+Note that in PostgreSQL, you use the || as the concatenating operator that concatenates one or more strings into a single string.
+
+SELECT
+    first_name || ' ' || last_name AS full_name
+FROM
+    customer;
+	
+## Explain -- 
+
+We concatenate two column and gave namme to it as a full_name.
+
+SELECT
+    first_name || ' ' || last_name "full name"
+FROM
+    customer;
+
+## Explain -- 
+
+Instead of using AS we can also give "  ".
+Even though you have only one word then also " " is mandatory.
+
+
+Summary
+Assign a column or an expression a column alias using the syntax column_name AS alias_name or expression AS alias_name.
+The AS keyword is optional.
+Use double quotes (“) to surround a column alias that contains spaces.
+
+
