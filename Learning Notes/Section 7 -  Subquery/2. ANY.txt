@@ -1,0 +1,78 @@
+ANY is used to compared a value to set of values retured by Subquery.
+
+## Syntax :
+
+expresion operator ANY(subquery)
+
+## Points to remember : 
+
+The subquery must return exactly one column.
+The ANY operator must be preceded by one of the following comparison operator =, <=, >, <, > and <>
+The ANY operator returns true if any value of the subquery meets the condition, otherwise, it returns false.
+
+
+IMP :   Note that SOME is a synonym for ANY, meaning that you can substitute SOME for ANY in any SQL statement.
+
+
+SELECT title
+FROM film
+WHERE length >= ANY(
+    SELECT MAX( length )
+    FROM film
+    INNER JOIN film_category USING(film_id)
+    GROUP BY  category_id );
+
+
+## Explain --
+
+Here actual execution will start from sub-query. First it will fetch all MAX Lenght movies from the film_category and film table.
+Then it will be used with the outer query in where condition and that query will output the data whichever movie is having length >= ANY output.
+
+Note : In above example we can use SOME also without any issue and it will return the same output without any error.
+	   If the subquery does not return any rows, the entire query returns an empty result set.
+
+
+ANY vs. IN
+
+The = ANY is equivalent to IN operator.
+
+SELECT
+    title,
+    category_id
+FROM
+    film
+INNER JOIN film_category
+        USING(film_id)
+WHERE
+    category_id = ANY(
+        SELECT
+            category_id
+        FROM
+            category
+        WHERE
+            NAME = 'Action'
+            OR NAME = 'Drama'
+    );
+	
+	
+	
+SELECT
+    title,
+    category_id
+FROM
+    film
+INNER JOIN film_category
+        USING(film_id)
+WHERE
+    category_id IN(
+        SELECT
+            category_id
+        FROM
+            category
+        WHERE
+            NAME = 'Action'
+            OR NAME = 'Drama'
+    );
+	
+	
+

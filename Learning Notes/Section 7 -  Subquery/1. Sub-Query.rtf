@@ -1,0 +1,41 @@
+A subquery is a query nested inside another query such as SELECT, INSERT, DELETE and UPDATE.
+
+To construct a subquery, we put the second query in brackets and use it in the WHERE clause as an expression:
+
+SELECT
+	film_id,
+	title,
+	rental_rate
+FROM
+	film
+WHERE
+	rental_rate > (
+		SELECT
+			AVG (rental_rate)
+		FROM
+			film
+	);
+
+The query inside the brackets is called a subquery or an inner query. 
+The query that contains the subquery is known as an outer query.
+
+PostgreSQL executes the query that contains a subquery in the following sequence:
+
+	First, executes the subquery.
+	Second, gets the result and passes it to the outer query.
+	Third, executes the outer query.
+
+
+PostgreSQL subquery with EXISTS operator:
+
+	EXISTS subquery
+
+A subquery can be an input of the EXISTS operator. If the subquery returns any row, the EXISTS operator returns true. 
+If the subquery returns no row, the result of EXISTS operator is false.
+
+
+The EXISTS operator only cares about the number of rows returned from the subquery,
+not the content of the rows, therefore, the common coding convention of EXISTS operator is as follows:
+
+EXISTS (SELECT 1 FROM tbl WHERE condition);
+

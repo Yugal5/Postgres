@@ -1,0 +1,96 @@
+The GROUP BY clause divides the rows returned from the SELECT statement into groups. For each group, you can apply an aggregate function e.g.,  SUM() 
+to calculate the sum of items or COUNT() to get the number of items in the groups.
+
+
+## Syntax : 
+
+SELECT 
+   column_1, 
+   column_2,
+   ...,
+   aggregate_function(column_3)
+FROM 
+   table_name
+GROUP BY 
+   column_1,
+   column_2,
+   ...;
+   
+   
+PostgreSQL evaluates the GROUP BY clause after the FROM and WHERE clauses and before the HAVING SELECT, DISTINCT, ORDER BY and LIMIT clauses.
+
+
+SELECT
+   customer_id
+FROM
+   payment
+GROUP BY
+   customer_id;
+   
+## Explain -- 
+
+Here we just made group by customer_id so everything output will be in GROUP.
+
+SELECT
+	customer_id,
+   count(customer_id)
+FROM
+   payment
+GROUP BY
+   customer_id;
+   
+## Explain --
+
+Here we can see cust_id with count of those cust_id with the help of COUNT.
+
+   
+SELECT
+	customer_id,
+	SUM (amount)
+FROM
+	payment
+GROUP BY
+	customer_id;
+	
+## Explain --
+
+Here we can see that for every similar customer_id its sum of amount.	
+
+	
+SELECT
+	first_name || ' ' || last_name full_name,
+	SUM (amount) amount
+FROM
+	payment
+INNER JOIN customer USING (customer_id)    	
+GROUP BY
+	full_name
+ORDER BY amount;
+
+## Explain --
+
+2 things here : 
+	1) Uses of || '  ' || is to combine two columns in select otherwise we cann use concat() also.
+	2) we can also use INNER JOIN and can use that alias name for the purpose of GROUP BY.
+	
+
+SELECT 
+	customer_id, 
+	staff_id, 
+	SUM(amount) 
+FROM 
+	payment
+GROUP BY 
+	staff_id, 
+	customer_id
+ORDER BY 
+    customer_id;
+	
+## Explain --
+
+Here we can see that we use two columns for the purpose of GROUP BY , so first it will group all o/p based on first column and then on 2nd column.
+
+	
+
+	
+

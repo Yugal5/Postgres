@@ -1,0 +1,72 @@
+The PostgreSQL INSERT statement allows you to insert a new row into a table.
+
+## Syntax : 
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …);
+
+
+## RETURNING clause :
+
+The INSERT statement also has an optional RETURNING clause that returns the information of the inserted row.
+
+## Syntax :
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …)
+RETURNING *;
+
+Above query returns whole row.
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …)
+RETURNING id;
+
+Where as above query returns only selected column.
+
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …)
+RETURNING output_expression AS output_name;
+
+Rename the retured value.
+
+DROP TABLE IF EXISTS links;
+
+CREATE TABLE links (
+	id SERIAL PRIMARY KEY,
+	url VARCHAR(255) NOT NULL,
+	name VARCHAR(255) NOT NULL,
+	description VARCHAR (255),
+        last_update DATE
+);
+
+Above query will create a table with name links.
+
+
+INSERT INTO links (url, name)
+VALUES('https://www.postgresqltutorial.com','PostgreSQL Tutorial');
+
+Insert into links.
+
+INSERT INTO links (url, name)
+VALUES('http://www.oreilly.com','O''Reilly Media');
+
+Insert into links.
+
+INSERT INTO links (url, name)
+VALUES('http://www.postgresql.org','PostgreSQL') 
+RETURNING id;
+
+After insert into table it will give us id which is inserted.
+
+INSERT INTO links (url, name, last_update)
+VALUES('https://www.google.com','Google','2013-06-01')
+returning *;
+
+Above query will return whole row which is inserted now.
+
+
+Summary
+	Use PostgreSQL INSERT statement to insert data into a table.
+	Use the RETURNING clause to get the inserted rows.

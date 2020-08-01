@@ -1,0 +1,61 @@
+
+The PostgreSQL UPDATE statement allows you to modify data in a table. The following illustrates the syntax of the UPDATE statement:
+
+# Syntax :
+
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition;
+
+
+# Returning updated rows
+
+# Syntax :
+
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition
+RETURNING * | output_expression AS output_name;
+
+
+
+DROP TABLE IF EXISTS courses;
+
+CREATE TABLE courses(
+	course_id serial primary key,
+	course_name VARCHAR(255) NOT NULL,
+	description VARCHAR(500),
+	published_date date
+);
+
+INSERT INTO 
+	courses(course_name, description, published_date)
+VALUES
+	('PostgreSQL for Developers','A complete PostgreSQL for Developers','2020-07-13'),
+	('PostgreSQL Admininstration','A PostgreSQL Guide for DBA',NULL),
+	('PostgreSQL High Performance',NULL,NULL),
+	('PostgreSQL Bootcamp','Learn PostgreSQL via Bootcamp','2013-07-11'),
+	('Mastering PostgreSQL','Mastering PostgreSQL in 21 Days','2012-06-30');
+
+# Above query will create the table and insert some values in that i.e. multiple row insertion.
+
+UPDATE courses
+SET published_date = '2020-08-01' 
+WHERE course_id = 3;
+
+# Update example from above query.
+
+UPDATE courses
+SET published_date = '2020-07-01'
+WHERE course_id = 2
+RETURNING *;
+
+# Update query with returning i.e. it will let us  know which row it updated.	
+
+# Summary :
+	Use the PostgreSQL UPDATE statement to update data in one or more columns of a table.
+	Use the RETURNING clause to return the updated rows from the UPDATE statement

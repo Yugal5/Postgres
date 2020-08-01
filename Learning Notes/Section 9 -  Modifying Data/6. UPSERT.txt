@@ -1,0 +1,50 @@
+
+In relational databases, the term upsert is referred to as merge. 
+The idea is that when you insert a new row into the table, PostgreSQL will update the row if it already exists, otherwise, it will insert the new row. 
+That is why we call the action is upsert (the combination of update or insert).
+
+If we alreay have record available in our table and we want to insert new record with same value then we have to use upsert.
+Otherwise it will work fine with Insert if new record.
+
+INSERT INTO table_name(column_list) 
+VALUES(value_list)
+ON CONFLICT target action;
+
+DROP TABLE IF EXISTS customers;
+
+CREATE TABLE customers (
+	customer_id serial PRIMARY KEY,
+	name VARCHAR UNIQUE,
+	email VARCHAR NOT NULL,
+	active bool NOT NULL DEFAULT TRUE
+);
+
+INSERT INTO 
+    customers (name, email)
+VALUES 
+    ('IBM', 'contact@ibm.com'),
+    ('Microsoft', 'contact@microsoft.com'),
+    ('Intel', 'contact@intel.com');
+	
+INSERT INTO customers (NAME, email)
+VALUES('Microsoft','hotline@microsoft.com') 
+ON CONFLICT ON CONSTRAINT customers_name_key 
+DO NOTHING;
+
+
+#  The statement specified that if the customer name exists in the  customers table, just ignore it (do nothing).
+
+
+INSERT INTO customers (name, email)
+VALUES('Microsoft','hotline@microsoft.com') 
+ON CONFLICT (name) 
+DO NOTHING;
+
+
+
+INSERT INTO customers (name, email)
+VALUES('Microsoft','hotline@microsoft.com') 
+ON CONFLICT (name) 
+DO 
+   UPDATE SET email = EXCLUDED.email || ';' || customers.email;
+

@@ -1,0 +1,42 @@
+To insert multiple rows into a table using a single INSERT statement, you use the following syntax:
+
+INSERT INTO table_name (column_list)
+VALUES
+    (value_list_1),
+    (value_list_2),
+    ...
+    (value_list_n);
+	
+E.g.
+
+INSERT INTO 
+    links (url, name)
+VALUES
+    ('https://www.google.com','Google'),
+    ('https://www.yahoo.com','Yahoo'),
+    ('https://www.bing.com','Bing');
+	
+# Insert more 3 rows in links.	
+	
+
+INSERT INTO 
+    links(url,name, description)
+VALUES
+    ('https://duckduckgo.com/','DuckDuckGo','Privacy & Simplified Search Engine'),
+    ('https://swisscows.com/','Swisscows','Privacy safe WEB-search')
+RETURNING *;
+
+# Insert 2 more rows in links table and then return the inserted rows.
+
+INSERT INTO 
+    links(url,name, description)
+VALUES
+    ('https://www.searchencrypt.com/','SearchEncrypt','Search Encrypt'),
+    ('https://www.startpage.com/','Startpage','The world''s most private search engine')
+RETURNING id;
+
+# Insert 2 more rows in links table and then return the inserted rows id.
+
+Summary
+	Specify multiple value lists in the INSERT statement to insert multiple rows into a table.
+	Use RETURNING clause to return the inserted rows.
